@@ -35,15 +35,14 @@ func main() {
 	//log.Printf("ct : %s", ct)
 	if strings.HasPrefix(ct, "image/") {
 		// 画像だったらbase64にして出力する
-		//_, format, err := image.DecodeConfig(bytes.NewReader(b))
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
-		//log.Printf("format : %s", format)
 		str := base64.StdEncoding.EncodeToString(b)
-		b64 := fmt.Sprintf("data:image/%s;base64,%s", ct[6:], str)
-		if cb.WriteAll(b64) != nil {
+		b64 := fmt.Sprintf("![](data:image/%s;base64,%s)", ct[6:], str)
+		// クリップボードに書き込むのはやめた
+		// ただ標準出力に出力する
+		if false && cb.WriteAll(b64) != nil {
 			log.Fatal(err)
+		} else {
+			fmt.Println(b64)
 		}
 	}
 }

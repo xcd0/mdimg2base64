@@ -1,9 +1,7 @@
 github.com/atotto/clipboard v0.1.4 h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4=
 github.com/atotto/clipboard v0.1.4/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
-github.com/skanehira/clipboard-image/v2 v2.0.0 h1:Kp+RNOgIlgzDkP3EskwuBnM0Fk4sc+HgcWE5RC+PnNI=
-github.com/skanehira/clipboard-image/v2 v2.0.0/go.mod h1:NXSYl4FJinIUFKJfeP1lGz8DIEUYjnEqwdMZ777S1E0=
-github.com/xcd0/clipboard-image v0.0.0-20230307062930-4c11c251e57d h1:kkDA0Q61Mw3RYgPcPR0ZowhyI19suilMZbxnmkOVGZM=
-github.com/xcd0/clipboard-image v0.0.0-20230307062930-4c11c251e57d/go.mod h1:yNCth6uZqKsRH+KeLdooZq3shIP6bvcmtAxz1wDbkuM=
+github.com/xcd0/clipboard-image v0.0.0-20230307064826-30a137b1a895 h1:6TcmgLPFFaSAQofvBPTAMOzabgRp0CTE3pnBzwzpc2E=
+github.com/xcd0/clipboard-image v0.0.0-20230307064826-30a137b1a895/go.mod h1:yNCth6uZqKsRH+KeLdooZq3shIP6bvcmtAxz1wDbkuM=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
