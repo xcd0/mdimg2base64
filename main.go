@@ -3,17 +3,17 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 
-	cb "github.com/atotto/clipboard"
-	ci "github.com/xcd0/clipboard-image"
+	"golang.design/x/clipboard"
+
 	_ "golang.org/x/image/bmp"
 	_ "golang.org/x/image/tiff"
 )
@@ -22,27 +22,34 @@ func main() {
 	log.SetFlags(log.Ltime | log.Lshortfile) // ログの出力書式を設定する
 
 	// wslの時はwindowsのクリップボードを参照したい
-	// そういう処理はclipboard-imageライブラリのほうを修正した
-	r, err := ci.Read()
-	if err != nil {
-		log.Fatal(err)
+
+	if err := clipboard.Init(); err != nil {
+		panic(err)
 	}
-	b, err := ioutil.ReadAll(r)
-	if err != nil {
-		log.Fatal(err)
+
+	// クリップボードから画像を読み込む。
+	var imgdata []byte = clipboard.Read(clipboard.FmtImage)
+
+	ct := http.DetectContentType(imgdata)
+	if !strings.HasPrefix(ct, "image/") {
+		log.Printf("クリップボードに画像がありませんでした。")
+		log.Printf("クリップボードの中身 :\n%v", string(imgdata))
+		return
 	}
-	ct := http.DetectContentType(b)
-	//log.Printf("ct : %s", ct)
-	if strings.HasPrefix(ct, "image/") {
-		// 画像だったらbase64にして出力する
-		str := base64.StdEncoding.EncodeToString(b)
-		b64 := fmt.Sprintf("![](data:image/%s;base64,%s)", ct[6:], str)
-		// クリップボードに書き込むのはやめた
-		// ただ標準出力に出力する
-		if false && cb.WriteAll(b64) != nil {
-			log.Fatal(err)
-		} else {
-			fmt.Println(b64)
+
+	// 画像だったらbase64にして出力する
+	str := base64.StdEncoding.EncodeToString(imgdata)
+	b64 := fmt.Sprintf("![](data:image/%s;base64,%s)", ct[6:], str)
+
+	if len(os.Args) == 2 && os.Args[1] == "-" {
+		// 引数に - が指定されているとき標準出力に出力する。
+		fmt.Println(string(b64))
+	} else {
+		changed := clipboard.Write(clipboard.FmtText, []byte(b64))
+		//log.Printf("クリップボードに書き込んでいます。")
+		select {
+		case <-changed:
+			//log.Printf("クリップボードへの書き込みが完了しました。")
 		}
 	}
 }

@@ -25,7 +25,10 @@ nnoremap sp :r!mdimg2base64<CR>
 この状態でmdimg2base64を呼ぶと![](data:image/png;base64,iVBO........)というテキストが標準出力に出力される。  
 なのでvimでmarkdownを開き、ノーマルモードで`sp`と打てば画像の文字列が挿入される。  
 
+## wsl
 
+wslの場合windows側のクリップボードに書き込んだほうが都合が良い場合があります。  
+windows側のクリップボードに書き込みたい場合は、windows用のバイナリを使用します。  
 
 
 ## もっといい名前なかったのか
